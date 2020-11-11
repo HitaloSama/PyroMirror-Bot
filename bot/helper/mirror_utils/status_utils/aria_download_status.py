@@ -77,15 +77,15 @@ class AriaDownloadStatus(Status):
     def download(self):
         return self
 
-    def updateName(self,name):
+    def updateName(self, name):
         self.__name = name
 
-    def updateGid(self,gid):
+    def updateGid(self, gid):
         self.__gid = gid
 
     def getListener(self):
         return self.__listener
-    
+
     def uid(self):
         return self.__uid
 
@@ -104,4 +104,3 @@ class AriaDownloadStatus(Status):
             downloads = aria2.get_downloads(download.followed_by_ids)
             aria2.pause(downloads)
         aria2.pause([download])
-

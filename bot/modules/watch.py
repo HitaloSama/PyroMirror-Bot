@@ -14,7 +14,8 @@ def _watch(bot: Bot, update: Update, args: list, isTar=False):
     try:
         link = args[0]
     except IndexError:
-        sendMessage(f'/{BotCommands.WatchCommand} [yt_dl supported link] to mirror with youtube_dl', bot, update)
+        sendMessage(
+            f'/{BotCommands.WatchCommand} [yt_dl supported link] to mirror with youtube_dl', bot, update)
         return
     reply_to = update.message.reply_to_message
     if reply_to is not None:
@@ -24,10 +25,12 @@ def _watch(bot: Bot, update: Update, args: list, isTar=False):
 
     listener = MirrorListener(bot, update, isTar, tag)
     ydl = YoutubeDLHelper(listener)
-    threading.Thread(target=ydl.add_download,args=(link, f'{DOWNLOAD_DIR}{listener.uid}')).start()
+    threading.Thread(target=ydl.add_download, args=(
+        link, f'{DOWNLOAD_DIR}{listener.uid}')).start()
     sendStatusMessage(update, bot)
     if len(Interval) == 0:
-        Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
+        Interval.append(setInterval(
+            DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
 
 
 @run_async

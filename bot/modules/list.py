@@ -6,10 +6,11 @@ from bot.helper.telegram_helper.filters import CustomFilters
 import threading
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
+
 @run_async
-def list_drive(update,context):
+def list_drive(update, context):
     message = update.message.text
-    search = message.split(' ',maxsplit=1)[1]
+    search = message.split(' ', maxsplit=1)[1]
     LOGGER.info(f"Searching: {search}")
     gdrive = GoogleDriveHelper(None)
     msg = gdrive.drive_list(search)
@@ -18,8 +19,10 @@ def list_drive(update,context):
     else:
         reply_message = sendMessage('No result found', context.bot, update)
 
-    threading.Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()
+    threading.Thread(target=auto_delete_message, args=(
+        context.bot, update.message, reply_message)).start()
 
 
-list_handler = CommandHandler(BotCommands.ListCommand, list_drive,filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
+list_handler = CommandHandler(BotCommands.ListCommand, list_drive,
+                              filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 dispatcher.add_handler(list_handler)

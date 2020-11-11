@@ -10,7 +10,7 @@ class MirrorListeners:
 
     def onDownloadProgress(self):
         raise NotImplementedError
-    
+
     def onDownloadComplete(self):
         raise NotImplementedError
 

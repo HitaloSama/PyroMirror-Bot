@@ -11,8 +11,8 @@ from bot import bot
 def sendMessage(text: str, bot, update: Update):
     try:
         return bot.send_message(update.message.chat_id,
-                            reply_to_message_id=update.message.message_id,
-                            text=text, parse_mode='HTMl')
+                                reply_to_message_id=update.message.message_id,
+                                text=text, parse_mode='HTMl')
     except Exception as e:
         LOGGER.error(str(e))
 

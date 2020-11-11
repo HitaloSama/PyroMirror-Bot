@@ -19,4 +19,5 @@ class _BotCommands:
         self.WatchCommand = 'watch'
         self.TarWatchCommand = 'tarwatch'
 
+
 BotCommands = _BotCommands()

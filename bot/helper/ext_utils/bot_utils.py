@@ -139,6 +139,7 @@ def is_magnet(url: str):
         return True
     return False
 
+
 def new_thread(fn):
     """To use as decorator to make a function call threaded.
     Needs import
