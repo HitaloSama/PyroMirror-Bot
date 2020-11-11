@@ -169,7 +169,7 @@ class GoogleDriveHelper:
                 if err.resp.get('content-type', '').startswith('application/json'):
                     reason = json.loads(err.content).get(
                         'error').get('errors')[0].get('reason')
-                    if reason in ('userRateLimitExceeded', 'dailyLimitExceeded')
+                    if reason in ('userRateLimitExceeded', 'dailyLimitExceeded'):
                     if USE_SERVICE_ACCOUNTS:
                         self.switchServiceAccount()
                         LOGGER.info(f"Got: {reason}, Trying Again.")
@@ -258,7 +258,7 @@ class GoogleDriveHelper:
             if err.resp.get('content-type', '').startswith('application/json'):
                 reason = json.loads(err.content).get(
                     'error').get('errors')[0].get('reason')
-                if reason in ('userRateLimitExceeded', 'dailyLimitExceeded')
+                if reason in ('userRateLimitExceeded', 'dailyLimitExceeded'):
                 if USE_SERVICE_ACCOUNTS:
                     self.switchServiceAccount()
                     LOGGER.info(f"Got: {reason}, Trying Again.")
