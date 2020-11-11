@@ -7,7 +7,7 @@ RUN apt-get -qq update && \
     locales python3-lxml \
     curl pv jq ffmpeg \
     p7zip-full p7zip-rar
-RUN git submodule update --init --recursive
+RUN git clone 'https://github.com/JrMasterModelBuilder/cmrudl.py' vendor/cmrudl.py/
 COPY requirements.txt .
 COPY extract /usr/local/bin
 RUN chmod +x /usr/local/bin/extract
