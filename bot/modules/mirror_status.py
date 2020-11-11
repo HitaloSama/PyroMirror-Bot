@@ -1,7 +1,6 @@
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, status_reply_dict, DOWNLOAD_STATUS_UPDATE_INTERVAL, status_reply_dict_lock
+from bot import dispatcher, status_reply_dict, status_reply_dict_lock
 from bot.helper.telegram_helper.message_utils import *
-from time import sleep
 from bot.helper.ext_utils.bot_utils import get_readable_message
 from telegram.error import BadRequest
 from bot.helper.telegram_helper.filters import CustomFilters

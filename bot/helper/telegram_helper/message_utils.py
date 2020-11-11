@@ -4,7 +4,6 @@ import time
 from bot import AUTO_DELETE_MESSAGE_DURATION, LOGGER, bot, \
     status_reply_dict, status_reply_dict_lock
 from bot.helper.ext_utils.bot_utils import get_readable_message
-from telegram.error import TimedOut, BadRequest
 from bot import bot
 
 

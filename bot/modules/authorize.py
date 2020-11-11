@@ -4,7 +4,6 @@ from bot import AUTHORIZED_CHATS, dispatcher
 from telegram.ext import CommandHandler
 from bot.helper.telegram_helper.filters import CustomFilters
 from telegram.ext import Filters
-from telegram import Update
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
 
