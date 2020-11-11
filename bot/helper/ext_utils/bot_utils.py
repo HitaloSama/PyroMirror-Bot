@@ -64,8 +64,8 @@ def getDownloadByGid(gid):
         for dl in download_dict.values():
             status = dl.status()
             if status not in (MirrorStatus.STATUS_UPLOADING, MirrorStatus.STATUS_ARCHIVING, MirrorStatus.STATUS_EXTRACTING):
-            if dl.gid() == gid:
-                return dl
+                if dl.gid() == gid:
+                    return dl
     return None
 
 
