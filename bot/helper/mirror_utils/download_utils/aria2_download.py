@@ -10,9 +10,6 @@ from time import sleep
 
 class AriaDownloadHelper(DownloadHelper):
 
-    def __init__(self):
-        super().__init__()
-
     @new_thread
     def __onDownloadStarted(self, api, gid):
         LOGGER.info(f"onDownloadStart: {gid}")
