@@ -10,9 +10,6 @@ from time import sleep
 
 class AriaDownloadHelper(DownloadHelper):
 
-    def __init__(self):
-        super().__init__()
-
     @new_thread
     def __onDownloadStarted(self, api, gid):
         LOGGER.info(f"onDownloadStart: {gid}")
@@ -26,13 +23,16 @@ class AriaDownloadHelper(DownloadHelper):
             new_gid = download.followed_by_ids[0]
             new_download = api.get_download(new_gid)
             with download_dict_lock:
-                download_dict[dl.uid()] = AriaDownloadStatus(new_gid, dl.getListener())
+                download_dict[dl.uid()] = AriaDownloadStatus(
+                    new_gid, dl.getListener())
                 if new_download.is_torrent:
                     download_dict[dl.uid()].is_torrent = True
             update_all_messages()
             LOGGER.info(f'Changed gid from {gid} to {new_gid}')
         else:
-            if dl: threading.Thread(target=dl.getListener().onDownloadComplete).start()
+            if dl:
+                threading.Thread(
+                    target=dl.getListener().onDownloadComplete).start()
 
     @new_thread
     def __onDownloadPause(self, api, gid):
@@ -44,17 +44,20 @@ class AriaDownloadHelper(DownloadHelper):
     def __onDownloadStopped(self, api, gid):
         LOGGER.info(f"onDownloadStop: {gid}")
         dl = getDownloadByGid(gid)
-        if dl: dl.getListener().onDownloadError('Download stopped by user!')
+        if dl:
+            dl.getListener().onDownloadError('Download stopped by user!')
 
     @new_thread
     def __onDownloadError(self, api, gid):
-        sleep(0.5)  # sleep for split second to ensure proper dl gid update from onDownloadComplete
+        # sleep for split second to ensure proper dl gid update from onDownloadComplete
+        sleep(0.5)
         LOGGER.info(f"onDownloadError: {gid}")
         dl = getDownloadByGid(gid)
         download = api.get_download(gid)
         error = download.error_message
         LOGGER.info(f"Download Error: {error}")
-        if dl: dl.getListener().onDownloadError(error)
+        if dl:
+            dl.getListener().onDownloadError(error)
 
     def start_listener(self):
         aria2.listen_to_notifications(threaded=True, on_download_start=self.__onDownloadStarted,
@@ -63,8 +66,7 @@ class AriaDownloadHelper(DownloadHelper):
                                       on_download_stop=self.__onDownloadStopped,
                                       on_download_complete=self.__onDownloadComplete)
 
-
-    def add_download(self, link: str, path,listener):
+    def add_download(self, link: str, path, listener):
         if is_magnet(link):
             download = aria2.add_magnet(link, {'dir': path})
         else:
@@ -73,6 +75,6 @@ class AriaDownloadHelper(DownloadHelper):
             listener.onDownloadError(download.error_message)
             return
         with download_dict_lock:
-            download_dict[listener.uid] = AriaDownloadStatus(download.gid, listener)
+            download_dict[listener.uid] = AriaDownloadStatus(
+                download.gid, listener)
             LOGGER.info(f"Started: {download.gid} DIR:{download.dir} ")
-
