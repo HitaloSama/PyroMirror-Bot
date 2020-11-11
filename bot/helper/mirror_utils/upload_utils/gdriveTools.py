@@ -170,10 +170,10 @@ class GoogleDriveHelper:
                     reason = json.loads(err.content).get(
                         'error').get('errors')[0].get('reason')
                     if reason in ('userRateLimitExceeded', 'dailyLimitExceeded')
-                        if USE_SERVICE_ACCOUNTS:
-                            self.switchServiceAccount()
-                            LOGGER.info(f"Got: {reason}, Trying Again.")
-                            return self.upload_file(file_path, file_name, mime_type, parent_id)
+                    if USE_SERVICE_ACCOUNTS:
+                        self.switchServiceAccount()
+                        LOGGER.info(f"Got: {reason}, Trying Again.")
+                        return self.upload_file(file_path, file_name, mime_type, parent_id)
                     else:
                         raise err
         self._file_uploaded_bytes = 0
@@ -259,10 +259,10 @@ class GoogleDriveHelper:
                 reason = json.loads(err.content).get(
                     'error').get('errors')[0].get('reason')
                 if reason in ('userRateLimitExceeded', 'dailyLimitExceeded')
-                    if USE_SERVICE_ACCOUNTS:
-                        self.switchServiceAccount()
-                        LOGGER.info(f"Got: {reason}, Trying Again.")
-                        return self.copyFile(file_id, dest_id)
+                if USE_SERVICE_ACCOUNTS:
+                    self.switchServiceAccount()
+                    LOGGER.info(f"Got: {reason}, Trying Again.")
+                    return self.copyFile(file_id, dest_id)
                 else:
                     raise err
 
