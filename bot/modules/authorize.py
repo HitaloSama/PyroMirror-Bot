@@ -4,12 +4,11 @@ from bot import AUTHORIZED_CHATS, dispatcher
 from telegram.ext import CommandHandler
 from bot.helper.telegram_helper.filters import CustomFilters
 from telegram.ext import Filters
-from telegram import Update
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
 
 @run_async
-def authorize(update,context):
+def authorize(update, context):
     reply_message = update.message.reply_to_message
     msg = ''
     with open('authorized_chats.txt', 'a') as file:
@@ -35,7 +34,7 @@ def authorize(update,context):
 
 
 @run_async
-def unauthorize(update,context):
+def unauthorize(update, context):
     reply_message = update.message.reply_to_message
     if reply_message is None:
         # Trying to unauthorize a chat
@@ -66,4 +65,3 @@ unauthorize_handler = CommandHandler(command=BotCommands.UnAuthorizeCommand, cal
                                      filters=CustomFilters.owner_filter & Filters.group)
 dispatcher.add_handler(authorize_handler)
 dispatcher.add_handler(unauthorize_handler)
-

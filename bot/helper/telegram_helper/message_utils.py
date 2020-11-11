@@ -4,15 +4,14 @@ import time
 from bot import AUTO_DELETE_MESSAGE_DURATION, LOGGER, bot, \
     status_reply_dict, status_reply_dict_lock
 from bot.helper.ext_utils.bot_utils import get_readable_message
-from telegram.error import TimedOut, BadRequest
 from bot import bot
 
 
 def sendMessage(text: str, bot, update: Update):
     try:
         return bot.send_message(update.message.chat_id,
-                            reply_to_message_id=update.message.message_id,
-                            text=text, parse_mode='HTMl')
+                                reply_to_message_id=update.message.message_id,
+                                text=text, parse_mode='HTMl')
     except Exception as e:
         LOGGER.error(str(e))
 
