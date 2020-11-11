@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 import threading
 import time
 
@@ -33,7 +34,7 @@ LOGGER = logging.getLogger(__name__)
 try:
     if bool(getConfig('_____REMOVE_THIS_LINE_____')):
         logging.error('The README.md file there to be read! Exiting now!')
-        exit()
+        sys.exit()
 except KeyError:
     pass
 
@@ -78,7 +79,7 @@ try:
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
-    exit(1)
+    sys.exit(1)
 try:
     INDEX_URL = getConfig('INDEX_URL')
     if len(INDEX_URL) == 0:
