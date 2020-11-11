@@ -19,9 +19,11 @@ class DownloadHelper:
         self.eta_string = '0s'  # A listener class which have event callbacks
         self._resource_lock = threading.Lock()
 
-    def add_download(self, link: str, path):
+    @staticmethod
+    def add_download(link: str, path):
         raise MethodNotImplementedError
 
-    def cancel_download(self):
+    @staticmethod
+    def cancel_download():
         # Returns None if successfully cancelled, else error string
         raise MethodNotImplementedError

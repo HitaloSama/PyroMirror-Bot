@@ -11,11 +11,13 @@ from time import sleep
 class AriaDownloadHelper(DownloadHelper):
 
     @new_thread
-    def __onDownloadStarted(self, api, gid):
+    @staticmethod
+    def __onDownloadStarted(api, gid):
         LOGGER.info(f"onDownloadStart: {gid}")
         update_all_messages()
 
-    def __onDownloadComplete(self, api: API, gid):
+    @staticmethod
+    def __onDownloadComplete(api: API, gid):
         LOGGER.info(f"onDownloadComplete: {gid}")
         dl = getDownloadByGid(gid)
         download = api.get_download(gid)
@@ -35,20 +37,23 @@ class AriaDownloadHelper(DownloadHelper):
                     target=dl.getListener().onDownloadComplete).start()
 
     @new_thread
-    def __onDownloadPause(self, api, gid):
+    @staticmethod
+    def __onDownloadPause(api, gid):
         LOGGER.info(f"onDownloadPause: {gid}")
         dl = getDownloadByGid(gid)
         dl.getListener().onDownloadError('Download stopped by user!')
 
     @new_thread
-    def __onDownloadStopped(self, api, gid):
+    @staticmethod
+    def __onDownloadStopped(api, gid):
         LOGGER.info(f"onDownloadStop: {gid}")
         dl = getDownloadByGid(gid)
         if dl:
             dl.getListener().onDownloadError('Download stopped by user!')
 
     @new_thread
-    def __onDownloadError(self, api, gid):
+    @staticmethod
+    def __onDownloadError(api, gid):
         # sleep for split second to ensure proper dl gid update from onDownloadComplete
         sleep(0.5)
         LOGGER.info(f"onDownloadError: {gid}")
