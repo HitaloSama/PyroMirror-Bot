@@ -1,4 +1,5 @@
-import shutil, psutil
+import shutil
+import psutil
 import signal
 import pickle
 
@@ -44,7 +45,8 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 @run_async
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage(
+        "Restarting, Please wait!", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
@@ -115,7 +117,8 @@ def main():
                                   bot_help, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
-    log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
+    log_handler = CommandHandler(
+        BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
