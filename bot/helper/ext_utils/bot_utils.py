@@ -64,8 +64,8 @@ def getDownloadByGid(gid):
         for dl in download_dict.values():
             status = dl.status()
             if status not in (MirrorStatus.STATUS_UPLOADING, MirrorStatus.STATUS_ARCHIVING, MirrorStatus.STATUS_EXTRACTING)
-                if dl.gid() == gid:
-                    return dl
+            if dl.gid() == gid:
+                return dl
     return None
 
 
@@ -137,6 +137,7 @@ def is_magnet(url: str):
     if magnet:
         return True
     return False
+
 
 def new_thread(fn):
     """To use as decorator to make a function call threaded.
