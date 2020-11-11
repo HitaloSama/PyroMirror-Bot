@@ -1,4 +1,7 @@
 # What is this repo about?
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8138cc85b1664c62823b1c6524edea9b)](https://app.codacy.com/gh/HitaloSama/PyroMirror-Bot?utm_source=github.com&utm_medium=referral&utm_content=HitaloSama/PyroMirror-Bot&utm_campaign=Badge_Grade_Settings)
+
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
 # Inspiration 
